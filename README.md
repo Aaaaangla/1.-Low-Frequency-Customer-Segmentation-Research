@@ -1,77 +1,81 @@
-# Low-Frequency Customer Segmentation Research
+# Customer Segmentation Under Information Constraints
+
+## Overview
+
+Customer segmentation remains one of the most widely used techniques in customer analytics, supporting marketing strategy, customer retention, resource allocation, and personalised customer engagement.
+
+In practice, many organisations continue to rely on traditional RFM (Recency–Frequency–Monetary) frameworks to classify customers. While these approaches are simple and interpretable, they were originally developed under the assumption that sufficient customer behavioural information is available.
+
+However, this assumption is often violated in low-frequency transaction environments such as utilities, insurance, real estate, automotive services, and many B2B industries. In these settings, customer interactions are sparse, irregular, and highly information-constrained.
+
+This research investigates a fundamental question:
+
+**Can meaningful customer segmentation still be achieved when historical customer information is severely limited?**
+
+---
 
 ## Research Motivation
 
-Customer segmentation is one of the most widely adopted techniques in customer analytics, supporting marketing strategy, customer retention, personalisation, and resource allocation decisions.
+Most segmentation research focuses on developing new clustering algorithms or improving predictive performance.
 
-In practice, many organisations continue to rely on traditional RFM (Recency–Frequency–Monetary) segmentation frameworks due to their simplicity and interpretability. However, these approaches were originally developed under the assumption that customer transaction histories are sufficiently frequent and information-rich.
-
-This assumption becomes problematic in many real-world industries where customer purchases occur infrequently. Examples include insurance, real estate, automotive sales, industrial equipment, utilities, and high-value B2B services. In these environments, customer behaviour is often characterised by sparse transactions, limited observations, and long periods of inactivity.
-
-Under such conditions, it remains unclear whether conventional segmentation approaches can still generate meaningful customer groups.
-
----
-
-## Research Problem
-
-Most existing customer segmentation studies focus on improving clustering algorithms.
-
-This research takes a different perspective.
+This study takes a different perspective.
 
 Rather than asking:
 
-*"Which segmentation algorithm performs best?"*
+*"Which clustering algorithm performs best?"*
 
-this study asks:
+This research asks:
 
-*"Can meaningful customer segmentation be achieved at all when behavioural information is severely limited?"*
+*"Do the fundamental assumptions behind customer segmentation remain valid under low-frequency transaction conditions?"*
 
-The objective is therefore not to propose a new clustering method, but to investigate the structural limitations of customer segmentation under low-frequency transaction environments.
+If customer behaviour becomes too sparse, segmentation quality may deteriorate regardless of the algorithm being used.
+
+Understanding this limitation is important because inaccurate customer segments can lead to ineffective targeting strategies, poor business decisions, and misleading customer insights.
 
 ---
 
-## Research Approach
+## Research Design
 
-To evaluate this problem, customer segments are generated using two widely adopted AI-driven clustering approaches:
+This study evaluates customer segmentation under three levels of information availability:
+
+| Information Level   | Historical Window |
+| ------------------- | ----------------- |
+| Limited Information | 3 Months          |
+| Medium Information  | 6 Months          |
+| Rich Information    | 12 Months         |
+
+Customer behaviour is first transformed into RFM-based features and then segmented using two widely adopted AI-driven clustering approaches:
 
 * K-Means Clustering
 * Gaussian Mixture Models (GMM)
 
-Both methods are applied to RFM-derived behavioural features under different levels of historical information availability:
+These methods are intentionally selected as industry-standard baselines rather than novel algorithms.
 
-| Information Level   | Observation Window |
-| ------------------- | ------------------ |
-| Limited Information | 3 Months           |
-| Medium Information  | 6 Months           |
-| Rich Information    | 12 Months          |
-
-These models serve as diagnostic tools rather than optimisation targets.
-
-If segmentation quality deteriorates consistently across fundamentally different clustering paradigms, the problem is likely rooted in the underlying data structure rather than the choice of algorithm.
+If segmentation quality consistently deteriorates across both methods, the problem is likely caused by information scarcity rather than algorithm selection.
 
 ---
 
 ## Evaluation Framework
 
-A multi-dimensional evaluation framework is developed to assess segmentation effectiveness from three complementary perspectives:
+To assess segmentation effectiveness, a multi-dimensional evaluation framework is proposed.
 
-### 1. Predictive Performance
+### Predictive Performance
 
-Can customer segments improve future behavioural prediction?
+Evaluates whether customer segments improve future behavioural prediction.
 
 Metrics:
 
 * R²
 * RMSE
 
-Models:
+Prediction Models:
 
 * OLS Regression
 * XGBoost
 
-### 2. Structural Stability
+### Structural Stability
 
-Do segmentation structures remain consistent as information availability changes?
+Evaluates whether segmentation structures remain consistent as available information changes.
 
 Metrics:
 
@@ -80,9 +84,9 @@ Metrics:
 * Distribution Overlap
 * Cluster Size Consistency
 
-### 3. Structural Interpretability
+### Structural Interpretability
 
-Do generated segments remain behaviourally meaningful?
+Evaluates whether generated segments remain behaviourally meaningful and actionable.
 
 Metrics:
 
@@ -94,32 +98,42 @@ Metrics:
 
 ---
 
-## Preliminary Findings
+## Key Findings
 
-Initial results suggest that segmentation effectiveness is highly sensitive to information availability.
+Preliminary results indicate that customer segmentation effectiveness is highly sensitive to information availability.
 
-As observation windows become shorter:
+As historical information decreases:
 
 * Customer behaviour becomes increasingly sparse
 * Segment boundaries become less distinguishable
-* Distribution overlap between clusters increases
+* Overlap between customer groups increases
 * Structural stability deteriorates
 * Predictive usefulness declines
 
-The findings indicate that low-frequency customer environments introduce fundamental challenges that may not be solvable solely through improved clustering algorithms.
-
-Instead, the core issue may lie in the mismatch between traditional segmentation assumptions and the statistical characteristics of sparse behavioural data.
+These findings suggest that segmentation quality may be driven more by information availability than by clustering algorithm choice.
 
 ---
 
 ## Research Contribution
 
-This study contributes to customer analytics literature in three ways:
+This research contributes to customer analytics literature in three ways:
 
-1. Highlights the limitations of traditional segmentation assumptions in low-frequency industries.
+1. Highlights the limitations of applying traditional segmentation approaches in low-frequency transaction environments.
 
-2. Proposes a segmentation effectiveness evaluation framework incorporating prediction, stability, and interpretability.
+2. Proposes a practical evaluation framework for assessing segmentation effectiveness through prediction, stability, and interpretability.
 
-3. Provides empirical evidence that data sparsity may be a more critical constraint than algorithm selection when performing customer segmentation.
+3. Provides empirical evidence that information scarcity may be a more critical constraint than algorithm selection when performing customer segmentation.
 
-This research forms the first stage of a broader research agenda focused on developing segmentation methodologies specifically designed for low-frequency customer environments.
+---
+
+## Technologies
+
+Python • Scikit-Learn • Pandas • NumPy • K-Means • Gaussian Mixture Models • OLS Regression • XGBoost • Customer Analytics
+
+---
+
+## Research Status
+
+Current Stage: Conference Paper Development
+
+Future work will focus on developing segmentation methodologies specifically designed for low-frequency customer environments and validating the framework across additional industry datasets.
